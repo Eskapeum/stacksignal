@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="About StackSignal" description="We're developers who got tired of biased reviews. Here's who we are and why we started StackSignal.">
+  <!-- Hero Section -->
+  <section class="bg-[#0F172A] text-white py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="bg-[#3B82F6]/20 text-[#3B82F6] text-sm font-mono px-4 py-1 rounded">
+          <i class="fa-solid fa-users mr-2"></i>about
+        </span>
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">About StackSignal</h1>
+      <p class="text-xl text-slate-400 max-w-2xl">
+        We're developers who got tired of biased reviews. Here's our story.
+      </p>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="py-16">
+    <div class="max-w-3xl mx-auto px-4">
+      <div class="prose prose-lg max-w-none">
+        <h2 class="text-2xl font-bold text-[#0F172A] mb-4">Signal Over Noise</h2>
+        <p class="text-slate-600 mb-6 leading-relaxed">
+          Every tech review site seems to love every tool they write about. That's because most are just chasing affiliate commissions, ranking whatever pays the best regardless of quality.
+        </p>
+        <p class="text-slate-600 mb-6 leading-relaxed">
+          We built StackSignal because we wanted something different: <strong class="text-[#0F172A]">honest reviews from people who actually use these tools</strong>.
+        </p>
+
+        <h2 class="text-2xl font-bold text-[#0F172A] mb-4 mt-10">Our Testing Process</h2>
+        <p class="text-slate-600 mb-6 leading-relaxed">
+          Every tool we review gets real-world testing. Not a quick demo, not a feature checklist—actual use in real projects for at least 2 weeks. We measure performance, document annoyances, and call out when the marketing doesn't match reality.
+        </p>
+
+        <div class="bg-[#F1F5F9] rounded-xl p-6 my-8 border border-slate-200">
+          <h3 class="font-bold text-[#0F172A] mb-3 flex items-center gap-2">
+            <i class="fa-solid fa-handshake text-[#3B82F6]"></i> Our Promise
+          </h3>
+          <ul class="space-y-2 text-slate-600">
+            <li class="flex items-start gap-2">
+              <i class="fa-solid fa-check text-[#10B981] mt-1"></i>
+              <span>Companies cannot pay for positive reviews</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="fa-solid fa-check text-[#10B981] mt-1"></i>
+              <span>We disclose affiliate relationships clearly</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="fa-solid fa-check text-[#10B981] mt-1"></i>
+              <span>If a tool sucks, we'll tell you</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i class="fa-solid fa-check text-[#10B981] mt-1"></i>
+              <span>We update reviews when products change</span>
+            </li>
+          </ul>
+        </div>
+
+        <h2 class="text-2xl font-bold text-[#0F172A] mb-4 mt-10">Get in Touch</h2>
+        <p class="text-slate-600 mb-6 leading-relaxed">
+          Have feedback? Found an error? Want us to review something specific? Reach out:
+        </p>
+        <ul class="space-y-2 text-slate-600">
+          <li><i class="fa-solid fa-envelope text-[#3B82F6] mr-2"></i> hello@stacksignal.io</li>
+          <li><i class="fa-brands fa-x-twitter text-[#3B82F6] mr-2"></i> @stacksignal</li>
+          <li><i class="fa-brands fa-discord text-[#3B82F6] mr-2"></i> discord.gg/stacksignal</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</Layout>

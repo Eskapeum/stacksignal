@@ -1,0 +1,78 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// Get all blog posts and sort by date
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+// Category colors
+const categoryColors: Record<string, string> = {
+  reviews: 'bg-[#3B82F6]',
+  comparisons: 'bg-[#10B981]',
+  devops: 'bg-[#F97316]',
+  guides: 'bg-[#8B5CF6]'
+};
+---
+
+<Layout title="Blog | StackSignal" description="In-depth reviews, comparisons, and guides for developers who value their time.">
+  <!-- Hero Section -->
+  <section class="bg-[#0F172A] text-white py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="bg-[#3B82F6]/20 text-[#3B82F6] text-sm font-mono px-4 py-1 rounded">
+          <i class="fa-solid fa-newspaper mr-2"></i>blog
+        </span>
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4 text-white">Latest Articles</h1>
+      <p class="text-xl text-slate-400 max-w-2xl">
+        In-depth reviews, honest comparisons, and practical guides. No marketing BS.
+      </p>
+    </div>
+  </section>
+
+  <!-- Blog Posts -->
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      {posts.length === 0 ? (
+        <div class="text-center py-16">
+          <i class="fa-solid fa-newspaper text-6xl text-slate-300 mb-4"></i>
+          <p class="text-slate-500">No articles yet. Check back soon!</p>
+        </div>
+      ) : (
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {posts.map((post) => (
+            <article class="bg-white rounded-xl overflow-hidden hover:shadow-xl transition-shadow border border-slate-200 group">
+              <div class="relative h-40 bg-gradient-to-br from-[#0F172A] to-[#1E293B] flex items-center justify-center">
+                <i class="fa-solid fa-code text-5xl text-[#3B82F6]/30"></i>
+                <div class="absolute top-4 left-4 flex items-center gap-2">
+                  <span class={`${categoryColors[post.data.category] || 'bg-[#3B82F6]'} text-white text-xs px-2 py-1 rounded font-mono capitalize`}>
+                    {post.data.category}
+                  </span>
+                  <span class="text-xs text-slate-400">
+                    <i class="fa-regular fa-clock mr-1"></i>{post.data.readTime}
+                  </span>
+                </div>
+              </div>
+              <div class="p-6">
+                <time class="text-xs text-slate-400 font-mono mb-2 block">
+                  {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+                </time>
+                <h3 class="text-lg font-bold text-[#0F172A] mb-2 group-hover:text-[#3B82F6] transition-colors line-clamp-2">
+                  {post.data.title}
+                </h3>
+                <p class="text-slate-600 text-sm mb-4 line-clamp-2">
+                  {post.data.description}
+                </p>
+                <a href={`/blog/${post.slug}`} class="text-[#3B82F6] font-semibold text-sm hover:underline flex items-center gap-2">
+                  Read Article <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</Layout>

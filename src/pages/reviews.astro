@@ -1,0 +1,81 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// Get all blog posts and filter for reviews
+const allPosts = await getCollection('blog');
+const reviewPosts = allPosts.filter(post =>
+  post.data.category === 'reviews'
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Layout title="Tech Reviews" description="Honest, in-depth reviews of developer tools, SaaS products, and software. We test everything so you don't have to.">
+  <!-- Hero Section -->
+  <section class="bg-[#0F172A] text-white py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="bg-[#3B82F6]/20 text-[#3B82F6] text-sm font-mono px-4 py-1 rounded">
+          <i class="fa-solid fa-star mr-2"></i>reviews
+        </span>
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Tech Reviews</h1>
+      <p class="text-xl text-slate-400 max-w-2xl">
+        Honest, in-depth reviews of developer tools, SaaS products, and software. We test everything so you don't have to.
+      </p>
+    </div>
+  </section>
+
+  <!-- Reviews Grid -->
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      {reviewPosts.length > 0 ? (
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {reviewPosts.map((post) => (
+            <a href={`/blog/${post.slug}`} class="bg-white rounded-xl overflow-hidden hover:shadow-xl transition-all border border-slate-200 group">
+              <div class="h-40 bg-gradient-to-br from-[#0F172A] to-[#1E293B] flex items-center justify-center">
+                <i class="fa-solid fa-star text-5xl text-[#3B82F6]/30"></i>
+              </div>
+              <div class="p-6">
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded font-mono capitalize">
+                    {post.data.category}
+                  </span>
+                  <span class="text-slate-400 text-xs">
+                    <i class="fa-regular fa-clock mr-1"></i>{post.data.readTime}
+                  </span>
+                </div>
+                <h3 class="text-lg font-bold text-[#0F172A] mb-2 group-hover:text-[#3B82F6] transition-colors line-clamp-2">
+                  {post.data.title}
+                </h3>
+                <p class="text-slate-600 text-sm mb-4 line-clamp-2">
+                  {post.data.description}
+                </p>
+                <div class="flex items-center justify-between text-sm">
+                  <span class="text-slate-400">
+                    {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                  </span>
+                  <span class="text-[#3B82F6] font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
+                    Read Review <i class="fa-solid fa-arrow-right text-xs"></i>
+                  </span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-16">
+          <div class="w-24 h-24 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fa-solid fa-star text-4xl text-[#3B82F6]"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-[#0F172A] mb-2">Coming Soon!</h3>
+          <p class="text-slate-600 max-w-md mx-auto">
+            We're testing more tools every week. Check back soon for in-depth reviews!
+          </p>
+          <a href="/blog" class="inline-flex items-center gap-2 mt-6 text-[#3B82F6] font-semibold hover:underline">
+            <i class="fa-solid fa-arrow-left"></i> Browse All Articles
+          </a>
+        </div>
+      )}
+    </div>
+  </section>
+</Layout>

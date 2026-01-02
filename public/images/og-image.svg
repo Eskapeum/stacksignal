@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0F172A"/>
+
+  <!-- Code pattern decoration -->
+  <g fill="#1E293B" font-family="JetBrains Mono, monospace" font-size="14" opacity="0.3">
+    <text x="50" y="80">const signal = await fetch(data);</text>
+    <text x="50" y="110">if (signal.quality &gt; noise) {</text>
+    <text x="70" y="140">return recommend(signal);</text>
+    <text x="50" y="170">}</text>
+    <text x="900" y="500">// Ship better tools</text>
+    <text x="900" y="530">deploy(confidence);</text>
+  </g>
+
+  <!-- Logo Icon -->
+  <g transform="translate(500, 130)">
+    <circle cx="100" cy="100" r="90" fill="#1E293B"/>
+    <!-- Stack layers -->
+    <rect x="30" y="120" width="140" height="30" rx="8" fill="#3B82F6"/>
+    <rect x="40" y="80" width="120" height="30" rx="8" fill="#3B82F6"/>
+    <rect x="50" y="40" width="100" height="30" rx="8" fill="#3B82F6"/>
+    <!-- Signal waves -->
+    <path d="M 160 35 Q 185 55 160 75" stroke="#FFFFFF" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <path d="M 175 25 Q 210 55 175 85" stroke="#FFFFFF" stroke-width="8" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- Brand Name -->
+  <text x="600" y="380" font-family="Inter, sans-serif" font-size="72" font-weight="700" fill="#FFFFFF" text-anchor="middle">
+    <tspan>Stack</tspan><tspan fill="#3B82F6">Signal</tspan>
+  </text>
+
+  <!-- Tagline -->
+  <text x="600" y="450" font-family="JetBrains Mono, monospace" font-size="28" fill="#94A3B8" text-anchor="middle">
+    // Signal over noise
+  </text>
+
+  <!-- Trust badges -->
+  <g font-family="Inter, sans-serif" font-size="20" fill="#FFFFFF" opacity="0.9">
+    <text x="300" y="550" text-anchor="middle">Hands-on Testing</text>
+    <text x="600" y="550" text-anchor="middle">No Sponsor BS</text>
+    <text x="900" y="550" text-anchor="middle">Dev Approved</text>
+  </g>
+
+  <!-- Terminal cursor -->
+  <rect x="580" y="480" width="40" height="4" fill="#3B82F6">
+    <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+  </rect>
+</svg>

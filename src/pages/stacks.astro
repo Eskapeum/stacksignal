@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// Get all blog posts and filter for stacks or devops
+const allPosts = await getCollection('blog');
+const stackPosts = allPosts.filter(post =>
+  post.data.category === 'stacks' ||
+  post.data.category === 'devops' ||
+  post.data.title.toLowerCase().includes('stack')
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Layout title="Tech Stacks" description="Complete tech stack recommendations for different use cases. From solo projects to enterprise teams.">
+  <!-- Hero Section -->
+  <section class="bg-[#0F172A] text-white py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-center gap-3 mb-4">
+        <span class="bg-[#3B82F6]/20 text-[#3B82F6] text-sm font-mono px-4 py-1 rounded">
+          <i class="fa-solid fa-layer-group mr-2"></i>stacks
+        </span>
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Tech Stacks</h1>
+      <p class="text-xl text-slate-400 max-w-2xl">
+        Complete stack recommendations for every use case. Tools that actually work together.
+      </p>
+    </div>
+  </section>
+
+  <!-- Stacks Grid -->
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      {stackPosts.length > 0 ? (
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {stackPosts.map((post) => (
+            <a href={`/blog/${post.slug}`} class="bg-white rounded-xl overflow-hidden hover:shadow-xl transition-all border border-slate-200 group">
+              <div class="h-40 bg-gradient-to-br from-[#10B981] to-[#059669] flex items-center justify-center">
+                <i class="fa-solid fa-layer-group text-5xl text-white/30"></i>
+              </div>
+              <div class="p-6">
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="bg-green-100 text-green-600 text-xs px-2 py-1 rounded font-mono capitalize">
+                    {post.data.category}
+                  </span>
+                  <span class="text-slate-400 text-xs">
+                    <i class="fa-regular fa-clock mr-1"></i>{post.data.readTime}
+                  </span>
+                </div>
+                <h3 class="text-lg font-bold text-[#0F172A] mb-2 group-hover:text-[#3B82F6] transition-colors line-clamp-2">
+                  {post.data.title}
+                </h3>
+                <p class="text-slate-600 text-sm mb-4 line-clamp-2">
+                  {post.data.description}
+                </p>
+                <div class="flex items-center justify-between text-sm">
+                  <span class="text-slate-400">
+                    {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                  </span>
+                  <span class="text-[#3B82F6] font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
+                    View Stack <i class="fa-solid fa-arrow-right text-xs"></i>
+                  </span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-16">
+          <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fa-solid fa-layer-group text-4xl text-[#10B981]"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-[#0F172A] mb-2">Coming Soon!</h3>
+          <p class="text-slate-600 max-w-md mx-auto">
+            We're curating the best tech stacks. Check back soon!
+          </p>
+          <a href="/blog" class="inline-flex items-center gap-2 mt-6 text-[#3B82F6] font-semibold hover:underline">
+            <i class="fa-solid fa-arrow-left"></i> Browse All Articles
+          </a>
+        </div>
+      )}
+    </div>
+  </section>
+</Layout>
